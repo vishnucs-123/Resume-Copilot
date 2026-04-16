@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ResumeCard from "@/components/resume/ResumeCard";
 import { redirect } from "next/navigation";
-import type { JobApplication, Resume } from "@prisma/client";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -30,10 +29,10 @@ export default async function DashboardPage() {
   });
 
   const statusCounts = {
-    SAVED: jobApps.filter((j: JobApplication) => j.status === "SAVED").length,
-    APPLIED: jobApps.filter((j: JobApplication) => j.status === "APPLIED").length,
-    INTERVIEW: jobApps.filter((j: JobApplication) => j.status === "INTERVIEW").length,
-    OFFER: jobApps.filter((j: JobApplication) => j.status === "OFFER").length,
+   SAVED: jobApps.filter((j) => j.status === "SAVED").length,
+APPLIED: jobApps.filter((j) => j.status === "APPLIED").length,
+INTERVIEW: jobApps.filter((j) => j.status === "INTERVIEW").length,
+OFFER: jobApps.filter((j) => j.status === "OFFER").length,
   };
 
   return (
@@ -106,7 +105,7 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {resumes.map((resume: Resume) => (
+            {resumes.map((resume) => (
               <ResumeCard key={resume.id} resume={resume} />
             ))}
           </div>
