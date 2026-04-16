@@ -1,3 +1,4 @@
+import React from "react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Link from "next/link";
@@ -33,8 +34,8 @@ export default async function DashboardPage() {
   });
 
   const jobApps: JobLike[] = jobAppsRaw.map((job: { status: string }) => ({
-  status: job.status,
-}));
+    status: job.status,
+  }));
 
   const statusCounts = {
     SAVED: jobApps.filter((j: JobLike) => j.status === "SAVED").length,
@@ -113,9 +114,9 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {resumes.map((resume) => (
-              <ResumeCard key={resume.id} resume={resume} />
-            ))}
+            {resumes.map((resume: React.ComponentProps<typeof ResumeCard>["resume"]) => (
+  <ResumeCard key={resume.id} resume={resume} />
+))}
           </div>
         )}
       </div>
