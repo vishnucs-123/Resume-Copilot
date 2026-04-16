@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import ResumeCard from "@/components/resume/ResumeCard";
 import { redirect } from "next/navigation";
 
+type JobLike = {
+  status: string;
+};
+
 export default async function DashboardPage() {
   const session = await auth();
 
@@ -23,16 +27,20 @@ export default async function DashboardPage() {
     orderBy: { updatedAt: "desc" },
   });
 
-  const jobApps = await db.jobApplication.findMany({
+  const jobAppsRaw = await db.jobApplication.findMany({
     where: { userId },
     orderBy: { createdAt: "desc" },
   });
 
+  const jobApps: JobLike[] = jobAppsRaw.map((job) => ({
+    status: job.status,
+  }));
+
   const statusCounts = {
-   SAVED: jobApps.filter((j) => j.status === "SAVED").length,
-APPLIED: jobApps.filter((j) => j.status === "APPLIED").length,
-INTERVIEW: jobApps.filter((j) => j.status === "INTERVIEW").length,
-OFFER: jobApps.filter((j) => j.status === "OFFER").length,
+    SAVED: jobApps.filter((j: JobLike) => j.status === "SAVED").length,
+    APPLIED: jobApps.filter((j: JobLike) => j.status === "APPLIED").length,
+    INTERVIEW: jobApps.filter((j: JobLike) => j.status === "INTERVIEW").length,
+    OFFER: jobApps.filter((j: JobLike) => j.status === "OFFER").length,
   };
 
   return (
