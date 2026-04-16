@@ -1,13 +1,123 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  aiCallsToday  Int       @default(0)
+  aiCallsReset  DateTime  @default(now())
+
+  resumes       Resume[]
+  sessions      Session[]
+  accounts      Account[]
+  jobApps       JobApplication[]
+}
+
+model Resume {
+  id             String   @id @default(cuid())
+  userId         String
+  title          String   @default("My Resume")
+
+  basicInfo      Json
+  summary        String?  @db.Text
+  experience     Json     @default("[]")
+  education      Json     @default("[]")
+  skills         Json     @default("[]")
+  projects       Json     @default("[]")
+  certifications Json     @default("[]")
+
+  template       String   @default("ats-clean")
+  isPublic       Boolean  @default(false)
+  publicSlug     String?  @unique
+  atsScore       Int?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobMatches     JobMatch[]
+}
+
+model JobApplication {
+  id            String   @id @default(cuid())
+  userId        String
+
+  jobTitle      String
+  company       String
+  jobUrl        String?
+  jobDesc       String   @db.Text
+
+  status        String   @default("SAVED")
+  matchScore    Int?
+  missingSkills Json?
+  notes         String?  @db.Text
+
+  appliedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model JobMatch {
+  id            String   @id @default(cuid())
+  resumeId      String
+
+  jobTitle      String
+  company       String
+  jobDesc       String   @db.Text
+  matchScore    Int
+  missingSkills Json
+  suggestions   Json
+
+  createdAt     DateTime @default(now())
+
+  resume        Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
