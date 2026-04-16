@@ -2,7 +2,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { NextRequest } from "next/server";
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { randomBytes } from "crypto";
 
@@ -19,8 +18,8 @@ const resumeUpdateSchema = z.object({
   publicSlug: z.string().trim().max(200).nullable().optional(),
 });
 
-function toJsonValue(value: unknown): Prisma.InputJsonValue {
-  return JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
+function toJsonValue(value: unknown) {
+  return JSON.parse(JSON.stringify(value));
 }
 
 function slugifyName(name: string) {
@@ -36,7 +35,7 @@ async function generateUniquePublicSlug(baseName?: string) {
   const base = slugifyName(baseName || "resume") || "resume";
 
   for (let i = 0; i < 10; i++) {
-    const suffix = randomBytes(6).toString("hex"); // 12 chars
+    const suffix = randomBytes(6).toString("hex");
     const slug = `${base}-${suffix}`;
 
     const existing = await db.resume.findUnique({
@@ -92,15 +91,15 @@ export async function PATCH(
     if (parsed.isPublic === true) {
       if (!finalPublicSlug) {
         const name =
-          typeof parsed.basicInfo?.name === "string" ? parsed.basicInfo.name : "resume";
+          typeof parsed.basicInfo?.name === "string"
+            ? parsed.basicInfo.name
+            : "resume";
 
         finalPublicSlug = await generateUniquePublicSlug(name);
       }
     }
 
     if (parsed.isPublic === false) {
-      // Keep slug for reuse if user republishes later.
-      // If you want to fully disable old links forever, set this to null instead.
       finalPublicSlug = existingResume.publicSlug;
     }
 
