@@ -32,9 +32,9 @@ export default async function DashboardPage() {
     orderBy: { createdAt: "desc" },
   });
 
-  const jobApps: JobLike[] = jobAppsRaw.map((job) => ({
-    status: job.status,
-  }));
+  const jobApps: JobLike[] = jobAppsRaw.map((job: { status: string }) => ({
+  status: job.status,
+}));
 
   const statusCounts = {
     SAVED: jobApps.filter((j: JobLike) => j.status === "SAVED").length,
