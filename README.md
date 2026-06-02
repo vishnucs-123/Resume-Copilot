@@ -1,36 +1,248 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Resume Copilot - AI-Powered Resume Assistant
 
-## Getting Started
+Resume Copilot is a modern full-stack SaaS platform that helps job seekers create, analyze, optimize, and tailor their resumes using Artificial Intelligence. The platform provides ATS scoring, job description matching, skill gap analysis, AI-powered resume suggestions, and personalized career guidance.
 
-First, run the development server:
+---
+
+## 🌟 Features
+
+### 📄 Resume Analysis
+
+* AI-powered resume review and feedback
+* ATS (Applicant Tracking System) score generation
+* Resume strength assessment
+* Keyword optimization suggestions
+
+### 🎯 Job Description Matching
+
+* Compare resumes against job descriptions
+* Match score calculation
+* Missing keyword detection
+* Personalized improvement recommendations
+
+### 🧠 AI Resume Copilot
+
+* Interactive AI career assistant
+* Resume improvement suggestions
+* Content rewriting and enhancement
+* Professional summary generation
+
+### 📊 Skill Gap Analysis
+
+* Identify missing skills for target roles
+* Personalized learning recommendations
+* Career growth insights
+
+### 🔐 User Authentication
+
+* Secure user login and registration
+* Protected dashboard routes
+* Resume management system
+
+### ☁️ Cloud-Based Platform
+
+* Store and manage multiple resumes
+* Access resumes from anywhere
+* Secure cloud database storage
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend
+
+* Next.js 14 (App Router)
+* React
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+* Framer Motion
+
+### Backend
+
+* Next.js Server Actions
+* REST API Routes
+* Middleware Authentication
+
+### Database
+
+* PostgreSQL
+* Neon Database
+* Prisma ORM
+
+### AI Integration
+
+* Gemini AI
+* Groq AI
+* Custom Prompt Engineering
+
+### Deployment
+
+* Vercel
+* Environment Variable Management
+
+---
+
+## 📂 Project Structure
+
+```bash
+resume-copilot/
+│
+├── app/
+├── components/
+├── lib/
+├── prisma/
+├── public/
+├── middleware.ts
+├── next.config.mjs
+├── tailwind.config.ts
+├── prisma.config.ts
+└── package.json
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/vishnucs-123/resume-copilot.git
+cd resume-copilot
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+GEMINI_API_KEY=
+GROQ_API_KEY=
+```
+
+### Setup Database
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Application will be available at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧠 How It Works
 
-To learn more about Next.js, take a look at the following resources:
+```text
+User Uploads Resume
+          ↓
+Resume Parsing
+          ↓
+AI Analysis Engine
+          ↓
+ATS Score Generation
+          ↓
+Job Description Matching
+          ↓
+Skill Gap Analysis
+          ↓
+Personalized Recommendations
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Key Highlights
 
-## Deploy on Vercel
+* AI-Powered Resume Optimization
+* ATS Compatibility Scoring
+* Job Description Matching
+* Skill Gap Detection
+* Modern SaaS Architecture
+* Cloud-Native Deployment
+* Responsive UI/UX
+* Production-Ready Infrastructure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📈 Use Cases
+
+### For Students
+
+* Improve internship applications
+* Optimize campus placement resumes
+* Prepare for fresher hiring
+
+### For Professionals
+
+* Tailor resumes for specific jobs
+* Improve ATS rankings
+* Identify missing skills
+
+### For Recruiters
+
+* Quick resume evaluation
+* Candidate screening assistance
+
+---
+
+## 🔮 Future Enhancements
+
+* Resume Builder with Templates
+* AI Interview Preparation
+* Cover Letter Generator
+* LinkedIn Profile Analyzer
+* Resume Version History
+* Multi-Language Support
+* Team Collaboration Features
+
+---
+
+## 👨‍💻 Author
+
+**Vishnu Lambu**
+
+📧 Email: [vishnulambu4@gmail.com](mailto:vishnulambu4@gmail.com)
+
+💼 LinkedIn: https://www.linkedin.com/in/vishnu-lambu/
+
+🐙 GitHub: https://github.com/vishnucs-123
+
+🌐 Portfolio: https://developervishnu.vercel.app/
+
+🚀 Live Demo: https://resumecopilot.vercel.app/
+
+---
+
+## 📌 Project Summary (Interview Version)
+
+* Developed an AI-powered Resume Assistant SaaS using Next.js, TypeScript, Prisma, and PostgreSQL.
+* Built ATS scoring, resume analysis, job description matching, and skill gap detection features using Generative AI.
+* Implemented secure authentication, cloud database integration, and responsive dashboard architecture.
+* Deployed a production-ready application on Vercel with scalable full-stack architecture.
+
+---
+
+⭐ If you find this project useful, consider giving it a star on GitHub.
